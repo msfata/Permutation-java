@@ -1,0 +1,34 @@
+package com;
+
+/*
+ * @author MSFATA ProgrammingHelp
+ */
+public class Permutation {
+	public static void main(String[] args) {
+		String stringToExamine = "123";
+		int stringLength = stringToExamine.length();
+		Permutation permutation = new Permutation();
+		permutation.permute(stringToExamine, 0, stringLength - 1);
+	}
+
+	private void permute(String stringToExamine, int startChar, int endChar) {
+		if (startChar == endChar)
+			System.out.print(stringToExamine + "   ");
+		else {
+			for (int index = startChar; index <= endChar; index++) {
+				stringToExamine = swapCharacters(stringToExamine, startChar, index);
+				permute(stringToExamine, startChar + 1, endChar);
+				stringToExamine = swapCharacters(stringToExamine, startChar, index);
+			}
+		}
+	}
+
+	public String swapCharacters(String stringToExamine, int startCharacter, int endCharacter) {
+		char temp;
+		char[] charArray = stringToExamine.toCharArray();
+		temp = charArray[startCharacter];
+		charArray[startCharacter] = charArray[endCharacter];
+		charArray[endCharacter] = temp;
+		return String.valueOf(charArray);
+	}
+}
